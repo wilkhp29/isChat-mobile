@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import Header from "../../components/header";
+import Conversas from "../../components/conversas";
+import Send from "../../components/send";
 
-export default class index extends Component {
-    render() {
-        return (
-            <View>
-                <Text> Conversas </Text>
-            </View>
-        )
-    }
+export default Conversa = ({navigation}) => {
+    return (
+        <>
+        <Header navigation={navigation}/>
+        <Conversas />
+        <Send />
+    </>
+    )
 }
-
 

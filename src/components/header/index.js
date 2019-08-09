@@ -1,10 +1,29 @@
-import React from 'react';
-import { View } from 'react-native';
+import React,{useEffect} from 'react';
+import {Icon} from "native-base";
+import { Container,Imagem,Username,ContainerArrow } from './styles';
+import {useSelector,useDispatch} from "react-redux";
 
-// import { Container } from './styles';
+export default function header({navigation}) {
+    const user = useSelector(state => state.usuarios.userSelect);
 
-export default function header() {
+    const dispatch = useDispatch();
+
+    function voltar(){
+      dispatch({type:"LIMPAR_SELECAO"})
+      navigation.navigate("Inicio");
+
+    }
   return (
-    <View />
+    <Container >
+      {user != null ? 
+      (
+        <>
+        <ContainerArrow onPress={() => voltar()}>
+            <Icon name="ios-arrow-back" type="Ionicons"/>
+        </ContainerArrow>
+        <Imagem source={{uri:user.imgUrl}}/>
+        <Username>{user.name}</Username>
+        </>) : (<></>)}
+    </Container>
   );
 }

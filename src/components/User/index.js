@@ -13,7 +13,7 @@ function handleConversa(){
         <Imagem source={{uri:user.imgUrl}}/>
         <ContainerTitle>
             <Username>{user.name}</Username>
-            <Conversa>{user.conversas[user.conversas.length -1].msg}</Conversa>
+            <Conversa>{user.conversas.length > 0 ? user.conversas[user.conversas.length -1].msg : ""}</Conversa>
         </ContainerTitle>
         {user.online ? (<Online />): (<Offline/>)}
     </Container>

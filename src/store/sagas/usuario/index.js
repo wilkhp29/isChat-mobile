@@ -33,6 +33,26 @@ function getallUsers(){
     return axios.get("usuarios");
 }
 
+function enviar_mensagem (data){
+    return axios.post("conversa",data);
+}
+
+function* send(){
+   try {
+    const de = yield select(state => state.usuarios.dadosUser._id);
+    const para = yield select(state => state.usuarios.userSelect._id);
+    const msg = yield select(state => state.usuarios.msg);
+    
+    const data = {de,para,msg}
+    const {data:mensagem} = yield call(enviar_mensagem,data);
+    if(mensagem._id){
+       yield put({type:"SET_MSG",payload:""});
+    }
+   } catch (error) {
+
+   }       
+
+}
 
 function* cadastrando(){
     
@@ -56,8 +76,11 @@ function* salvarDadosLogado(action){
 }
 
 
+
+
 export default function* usuarioRoot(){
     yield takeLatest("ASYNC_LOGAR",login);
     yield takeLatest("SALVAR_DADOS_LOGADO",salvarDadosLogado);
     yield takeLatest("GET_USERS",pegarUsuarios);
+    yield takeLatest("ASYNC_SEND",send)
 }

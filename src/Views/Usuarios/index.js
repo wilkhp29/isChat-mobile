@@ -12,7 +12,7 @@ const selectUsuario = useSelector(state => state.usuarios.userSelect);
     },[]);
 
     useEffect( () => {
-        if(selectUsuario !== null){
+        if(selectUsuario._id){
             navigation.navigate("Conversa");
         }
     },[selectUsuario]);
